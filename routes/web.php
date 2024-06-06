@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbonnementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,11 +13,14 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AbonnementController::class, "index"])->name('home');
+Route::get('about', [AbonnementController::class, "about"])->name('about');
+Route::get('services/', [AbonnementController::class, "service"])->name('services');
+Route::get('live/', [AbonnementController::class, "live"])->name('live');
+Route::get('agenda/', [AbonnementController::class, "agenda"])->name('agenda');
+Route::get('abonnement/', [AbonnementController::class, "abonnement"])->name('abonnement');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +32,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
